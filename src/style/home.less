@@ -1,0 +1,102 @@
+.mainPanel {
+  padding: 50px 200px;
+  .carousel {
+    margin: 0 auto;
+    height: 350px;
+    .carousel-item {
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .title {
+    padding-top: 40px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .bodyPanel {
+    margin-top: 10px;
+    display: flex;
+
+    .left {
+      flex: 7;
+      .card {
+        margin-top: 15px;
+        padding-bottom: 20px;
+        height: 250px;
+        .info {
+          float: left;
+          width: 65%;
+          .title {
+            padding-top: 0;
+            font-size: 20px;
+          }
+          .summary {
+            height: 150px;
+            padding-top: 10px;
+            padding-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            line-height: 1.8;
+          }
+          .detail {
+            margin-top: 10px;
+            span {
+              margin-right: 10px;
+              .item {
+                font-size: 13px;
+              }
+            }
+          }
+        }
+        .cover {
+          float: left;
+          width: 35%;
+          height: 220px;
+          margin-top: 5px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .card:nth-child(1) {
+        margin-top: 0;
+      }
+    }
+    .right {
+      margin-left: 25px;
+      flex: 3;
+      .card {
+        height: 500px;
+        .avatar {
+          margin: 40px auto;
+          width: 165px;
+          height: 165px;
+          border: 1px solid #000;
+          border-radius: 50%;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        }
+        .info {
+          text-align: center;
+          span {
+            font-size: 24px;
+            font-weight: 700;
+          }
+          p {
+            padding-top: 15px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
+}

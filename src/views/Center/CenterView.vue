@@ -1,0 +1,91 @@
+<template>
+  <div class="center">
+    <!-- 头部 -->
+    <Navbar></Navbar>
+
+    <div class="center-info">
+      <!-- 左侧功能框 -->
+      <el-affix :offset="150">
+        <el-card shadow="always" class="card-func">
+          <div class="avatar">
+            <img :src="user?.avatar" alt="" />
+          </div>
+          <div class="uname">{{ user?.uname }}</div>
+          <div class="info">
+            <p>{{ user?.desc1 }}</p>
+            <p>{{ user?.desc2 }}</p>
+          </div>
+          <div class="functions">
+            <el-button
+              type="primary"
+              :icon="Plus"
+              class="button"
+              @click="addBlog"
+              >Add a Blog</el-button
+            >
+            <el-button
+              type="default"
+              :icon="Plus"
+              class="button"
+              @click="addProject"
+              >Add a Project</el-button
+            >
+            <el-button
+              type="default"
+              :icon="Tools"
+              class="button"
+              @click="settingInfo"
+              >Setting Info</el-button
+            >
+          </div>
+        </el-card>
+      </el-affix>
+      <el-card shadow="always" class="card-info">
+        <div class="charts">
+          <ViewChart></ViewChart>
+        </div>
+        <div class="charts">
+          <CommentCharts></CommentCharts>
+        </div>
+        <div class="charts">
+          <StarCharts></StarCharts>
+        </div>
+      </el-card>
+    </div>
+    <!-- 回到顶部 -->
+    <BacktopCom></BacktopCom>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Plus, Tools } from '@element-plus/icons-vue'
+import BacktopCom from '@/components/BackTop/BacktopCom.vue'
+import ViewChart from '@/components/Charts/ViewCharts.vue'
+import CommentCharts from '@/components/Charts/CommentCharts.vue'
+import StarCharts from '@/components/Charts/StarCharts.vue'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { userStore } from '@/store'
+
+const u_store = userStore()
+const { userInfo } = storeToRefs(u_store)
+const user = computed(() => {
+  return userInfo.value.userInfo[0]
+})
+
+const router = useRouter()
+const addBlog = () => {
+  router.push('/addblog')
+}
+const addProject = () => {
+  router.push('/addproject')
+}
+const settingInfo = () => {
+  router.push('/setting')
+}
+</script>
+
+<style scoped lang="less">
+@import '@/style/center.less';
+</style>

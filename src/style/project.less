@@ -1,0 +1,36 @@
+.project {
+  width: 1150px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .project-item {
+    width: 550px;
+    margin-bottom: 50px;
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      span {
+        font-size: 20px;
+      }
+    }
+    .detail {
+      .imgs {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        img {
+          width: 48%;
+          height: 200px;
+          margin-bottom: 10px;
+        }
+      }
+      .info {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        line-height: 1.6;
+      }
+    }
+  }
+}

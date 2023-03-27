@@ -1,0 +1,55 @@
+.blogList {
+  .list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 50px auto;
+    width: 1250px;
+    .box-card {
+      width: 610px;
+      margin-bottom: 20px;
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        span {
+          font-size: 18px;
+        }
+      }
+      .info {
+        display: flex;
+        justify-content: space-between;
+        height: 140px;
+        .summary {
+          flex: 7;
+          .content {
+            font-size: 15px;
+            height: 100px;
+            line-height: 1.6;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+          }
+          .detail {
+            margin-top: 10px;
+            span {
+              margin-right: 3px;
+              .item {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+        .cover {
+          flex: 3;
+          height: 140px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
