@@ -13,10 +13,10 @@
       </div>
       <!-- 链接 -->
       <div class="link">
-        <a href="">
+        <a href="https://github.com/maojiu-bb/blog">
           <img src="@/assets/imgs/github.png" alt="" />
         </a>
-        <a href="">
+        <a href="https://gitee.com/maojiubb/blog">
           <img src="@/assets/imgs/gitee.png" alt="" />
         </a>
       </div>

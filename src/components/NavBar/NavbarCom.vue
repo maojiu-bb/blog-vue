@@ -41,10 +41,10 @@
           active-color="#292e36"
         />
         <div class="imgs">
-          <a href="">
+          <a href="https://github.com/maojiu-bb/blog">
             <img src="@/assets/imgs/github.png" alt="" title="github" />
           </a>
-          <a href="">
+          <a href="https://gitee.com/maojiubb/blog">
             <img src="@/assets/imgs/gitee.png" alt="" title="gitee" />
           </a>
         </div>
