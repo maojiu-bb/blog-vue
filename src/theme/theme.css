@@ -1,8 +1,14 @@
 :root[theme='light'] {
   --bgColor: #fff;
   --textColor: #333;
+  --bgCardColor: #fff;
+  --borderCardColor: #fff;
+  --borderLoginCardColor: #333;
 }
 :root[theme='dark'] {
   --bgColor: #000;
-  --textColor: #fff;
+  --textColor: #ddd;
+  --bgCardColor: #242424;
+  --borderCardColor: #666;
+  --borderLoginCardColor: #666;
 }

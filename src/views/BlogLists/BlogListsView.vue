@@ -62,22 +62,10 @@
 <script setup lang="ts">
 import { User, View, ChatLineRound, Star, Clock } from '@element-plus/icons-vue'
 import BacktopCom from '@/components/BackTop/BacktopCom.vue'
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
-
-import { blogStore } from '@/store/index'
-import { storeToRefs } from 'pinia'
-
-const b_store = blogStore()
-const { blog } = storeToRefs(b_store)
-const blogList = computed(() => {
-  return blog.value.blog
-})
-
-const router = useRouter()
-const goBlogDetail = (id: number) => {
-  router.push(`/blogdetail?blog_id=${id}`)
-}
+import { useBlog } from '@/hooks/useBlog'
+import { useRouters } from '@/hooks/useRouter'
+const { blogList } = useBlog()
+const { goBlogDetail } = useRouters()
 </script>
 
 <style scoped lang="less">

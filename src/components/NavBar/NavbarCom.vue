@@ -19,17 +19,27 @@
           class="input"
           :suffix-icon="Search"
           @click="search"
+          style="--el-input-bg-color: var(--bgCardColor)"
         />
-        <el-menu-item index="/home" @click="savepath('/home')"
+        <el-menu-item index="/home" @click="savepath('/home')" class="menu-item"
           >Home</el-menu-item
         >
-        <el-menu-item index="/bloglist" @click="savepath('/bloglist')"
+        <el-menu-item
+          index="/bloglist"
+          @click="savepath('/bloglist')"
+          class="menu-item"
           >BlogLists</el-menu-item
         >
-        <el-menu-item index="/project" @click="savepath('/project')"
+        <el-menu-item
+          index="/project"
+          @click="savepath('/project')"
+          class="menu-item"
           >Projects</el-menu-item
         >
-        <el-menu-item index="/center" @click="savepath('/center')"
+        <el-menu-item
+          index="/center"
+          @click="savepath('/center')"
+          class="menu-item"
           >Center</el-menu-item
         >
         <el-switch
@@ -39,12 +49,14 @@
           :active-icon="Moon"
           :inactive-icon="Sunny"
           active-color="#292e36"
+          @change="changeSwitch"
+          style="--el-switch-border-color: var(--borderCardColor)"
         />
         <div class="imgs">
-          <a href="https://github.com/maojiu-bb/blog">
+          <a href="https://github.com/maojiu-bb/blog" target="_blank">
             <img src="@/assets/imgs/github.png" alt="" title="github" />
           </a>
-          <a href="https://gitee.com/maojiubb/blog">
+          <a href="https://gitee.com/maojiubb/blog" target="_blank">
             <img src="@/assets/imgs/gitee.png" alt="" title="gitee" />
           </a>
         </div>
@@ -75,17 +87,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, computed } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { Search, Sunny, Moon } from '@element-plus/icons-vue'
-import { blogStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { ElMessage } from 'element-plus'
 import { Blog } from '@/types/blog'
-import router from '@/router'
+import { useRouters } from '@/hooks/useRouter'
+import { useBlog } from '@/hooks/useBlog'
+import { useSwitch } from '@/hooks/useSwitch'
+const { goBlogDetail } = useRouters()
+const { obscureBlogList, getObscureBlogList } = useBlog()
+const { value, changeSwitch } = useSwitch()
 
-const b_store = blogStore()
-const { obscureBlog } = storeToRefs(b_store)
-const { getObscureBlogList } = b_store
 let blogs = reactive(new Blog())
 const changeSearch = () => {
   watch(
@@ -93,10 +105,7 @@ const changeSearch = () => {
     (newVal, oldVal) => {
       getObscureBlogList(newVal)
         .then((res) => {
-          const blogList = computed(() => {
-            return obscureBlog.value.blog
-          })
-          blogs.blog = blogList.value
+          blogs.blog = obscureBlogList.value
         })
         .catch((err) => {
           ElMessage({
@@ -110,14 +119,13 @@ const changeSearch = () => {
     }
   )
 }
-const goBlogDetail = (blog_id: number) => {
-  router.push(`/blogdetail?blog_id=${blog_id}`)
-}
 
-const value = ref(false)
 let activeIndex = ref(sessionStorage.getItem('path') || '/home')
 const savepath = (path: string) => {
   sessionStorage.setItem('path', `${path}`)
+  if (path === '/login') {
+    localStorage.removeItem('token')
+  }
 }
 const handleSelect = (key: string, keyPath: string[]) => {
   activeIndex.value = key
@@ -135,76 +143,5 @@ const search = () => {
 </script>
 
 <style scoped lang="less">
-.el-button--text {
-  margin-right: 15px;
-}
-.el-select {
-  width: 300px;
-}
-.el-input {
-  width: 300px;
-}
-.dialog-footer button:first-child {
-  margin-right: 10px;
-}
-.navbar {
-  .dialog {
-    ul {
-      li {
-        display: block;
-        margin: 10px auto 0;
-        width: 600px;
-        height: 50px;
-        line-height: 50px;
-        padding-left: 10px;
-        background-color: #eee;
-        border-radius: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #b0dff2;
-        }
-      }
-    }
-  }
-  .flex-grow {
-    flex-grow: 1;
-  }
-  .input {
-    width: 200px;
-    height: 40px;
-    margin: 9px 20px;
-  }
-  .logo {
-    margin-left: 150px;
-    img {
-      width: 40px;
-    }
-    .title {
-      margin-left: 10px;
-      font-weight: 700;
-      font-size: 16px;
-    }
-  }
-  .el-menu-demo {
-    padding-right: 100px;
-  }
-  .switch {
-    margin-left: 25px;
-    margin-top: 10px;
-  }
-  .imgs {
-    display: flex;
-    margin: 12px 20px;
-    margin-right: 80px;
-    img {
-      width: 25px;
-      height: 25px;
-      margin: 0 10px;
-    }
-  }
-}
+@import '@/style/navbar.less';
 </style>

@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    GoBackCom: typeof import('./src/components/GoBack/GoBackCom.vue')['default']
     NavbarCom: typeof import('./src/components/NavBar/NavbarCom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

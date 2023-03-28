@@ -42,17 +42,10 @@
 
 <script setup lang="ts">
 import BacktopCom from '@/components/BackTop/BacktopCom.vue'
-import { projectStore } from '@/store'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
-
-const p_store = projectStore()
-const { project } = storeToRefs(p_store)
-
-const href = ref('')
-const goGitHub = (address: string) => {
-  href.value = address
-}
+import { useProject } from '@/hooks/useProject'
+import { useRouters } from '@/hooks/useRouter'
+const { project } = useProject()
+const { href, goGitHub } = useRouters()
 </script>
 
 <style scoped lang="less">

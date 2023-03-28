@@ -6,12 +6,15 @@
     margin: 50px auto;
     width: 1250px;
     .box-card {
+      background-color: var(--bgCardColor);
+      border: 1px solid var(--borderCardColor);
       width: 610px;
       margin-bottom: 20px;
       .card-header {
         display: flex;
         justify-content: space-between;
         span {
+          color: var(--textColor);
           font-size: 18px;
         }
       }
@@ -19,6 +22,7 @@
         display: flex;
         justify-content: space-between;
         height: 140px;
+        color: var(--textColor);
         .summary {
           flex: 7;
           .content {

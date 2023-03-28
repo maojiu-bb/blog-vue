@@ -7,10 +7,13 @@
   .project-item {
     width: 550px;
     margin-bottom: 50px;
+    background-color: var(--bgCardColor);
+    border: 1px solid var(--borderCardColor);
     .card-header {
       display: flex;
       justify-content: space-between;
       span {
+        color: var(--textColor);
         font-size: 20px;
       }
     }
@@ -26,6 +29,7 @@
         }
       }
       .info {
+        color: var(--textColor);
         overflow: hidden;
         text-overflow: ellipsis;
         word-wrap: break-word;

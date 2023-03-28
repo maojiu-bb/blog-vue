@@ -1,14 +1,10 @@
 <template>
   <div class="setting">
-    <el-page-header @back="goBack" :icon="ArrowLeft" class="header">
-      <template #content>
-        <span class="text-large font-600 mr-3">Setting Info</span>
-      </template>
-    </el-page-header>
+    <GoBackCom title="Setting Info"></GoBackCom>
     <el-card shadow="always" class="card">
       <!-- 设置头像 -->
       <div class="avatar">
-        <img :src="user?.avatar" alt="" />
+        <img :src="avatar" alt="" />
         <el-button type="primary" class="button" @click="showDialog"
           >Change Avatar</el-button
         >
@@ -70,11 +66,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { ArrowLeft, Plus } from '@element-plus/icons-vue'
-import { ref, reactive, computed } from 'vue'
-import { userStore } from '@/store'
-import { storeToRefs } from 'pinia'
+import GoBackCom from '@/components/GoBack/GoBackCom.vue'
+import { Plus } from '@element-plus/icons-vue'
+import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import type {
   UploadProps,
@@ -83,21 +77,17 @@ import type {
   FormRules
 } from 'element-plus'
 import { Iavatar } from '@/types/user'
-
-const u_store = userStore()
-const { userInfo } = storeToRefs(u_store)
-const { updateUserAvatar, updateUserInfo } = u_store
-const user = computed(() => {
-  return userInfo.value.userInfo[0]
-})
+import { useUser } from '@/hooks/useUser'
+const { avatar, uname, desc1, desc2, updateUserAvatar, updateUserInfo } =
+  useUser()
 
 const dialogTableVisible = ref(false)
 const dialogVisible = ref(false)
 const dialogImageUrl = ref('')
 const ruleForm = reactive({
-  uname: user.value?.uname,
-  desc1: user.value?.desc1,
-  desc2: user.value?.desc2
+  uname: uname.value,
+  desc1: desc1.value,
+  desc2: desc2.value
 })
 const fileList = ref<UploadUserFile[]>([])
 const ruleFormRef = ref<FormInstance>()
@@ -144,20 +134,6 @@ const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
 }
 const showDialog = () => {
   dialogTableVisible.value = true
-}
-/* const handleClose = (done: () => void) => {
-  ElMessageBox.confirm('Are you sure to close this dialog?')
-    .then(() => {
-      done()
-    })
-    .catch(() => {
-      // catch error
-    })
-} */
-
-const router = useRouter()
-const goBack = () => {
-  router.back()
 }
 
 const submitForm = async (formEl: FormInstance | undefined) => {

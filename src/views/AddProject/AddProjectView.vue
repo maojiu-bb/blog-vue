@@ -1,10 +1,6 @@
 <template>
   <div class="addProject">
-    <el-page-header @back="goBack" :icon="ArrowLeft" class="header">
-      <template #content>
-        <span class="text-large font-600 mr-3">Add a Project</span>
-      </template>
-    </el-page-header>
+    <GoBackCom title="Add a Project"></GoBackCom>
     <el-card class="card">
       <el-form
         ref="ruleFormRef"
@@ -53,10 +49,9 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ArrowLeft, Plus } from '@element-plus/icons-vue'
-import { reactive, ref, computed } from 'vue'
-import { projectStore } from '@/store'
-import { storeToRefs } from 'pinia'
+import { Plus } from '@element-plus/icons-vue'
+import GoBackCom from '@/components/GoBack/GoBackCom.vue'
+import { reactive, ref } from 'vue'
 import { Iproject } from '@/types/project'
 import {
   ElMessage,
@@ -65,11 +60,9 @@ import {
   UploadProps,
   UploadUserFile
 } from 'element-plus'
+import { useProject } from '@/hooks/useProject'
 
 const router = useRouter()
-const goBack = () => {
-  router.back()
-}
 
 const formSize = ref('default')
 const ruleFormRef = ref<FormInstance>()
@@ -94,19 +87,7 @@ const rules = reactive<FormRules>({
   ]
 })
 
-const p_store = projectStore()
-const { project } = storeToRefs(p_store)
-const { publicProjectInfo } = p_store
-const project_id = computed(() => {
-  let id = project.value.project.map((item) => item.project_id)
-  let max_id = id[0]
-  for (let i = 0; i < id.length; i++) {
-    if (id[i] > max_id) {
-      max_id = id[i]
-    }
-  }
-  return (max_id += 1)
-})
+const { project_id, publicProjectInfo } = useProject()
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -120,7 +101,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         project_cover: fileList.value.map((item) => item.url) as []
       }
       publicProjectInfo(data)
-        .then((res) => {
+        .then((res: any) => {
           ruleForm.name = ''
           ruleForm.address = ''
           ruleForm.desc = ''
@@ -131,10 +112,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             duration: 1000
           })
           setTimeout(() => {
+            sessionStorage.setItem('path', '/project')
             router.push('/project')
           }, 1000)
         })
-        .catch((err) => {
+        .catch((err: any) => {
           ElMessage({
             message: 'publice project fail!',
             type: 'warning'
@@ -166,11 +148,5 @@ const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
 </script>
 
 <style scoped lang="less">
-.addProject {
-  padding: 20px;
-  .card {
-    margin: 50px auto 0;
-    width: 1200px;
-  }
-}
+@import '@/style/addproject.less';
 </style>

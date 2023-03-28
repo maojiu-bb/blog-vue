@@ -1,9 +1,11 @@
 .blogdetail {
   padding: 30px;
   .card {
+    background-color: var(--bgCardColor);
     margin: 20px auto;
     width: 1000px;
     .card-header {
+      color: var(--textColor);
       .title {
         font-size: 20px;
         font-weight: 700;
@@ -24,6 +26,13 @@
         width: 100%;
         height: 100%;
       }
+    }
+    :deep(.vuepress-markdown-body) {
+      background-color: var(--bgCardColor);
+      color: var(--textColor);
+    }
+    :deep(.vuepress-markdown-body td) {
+      background-color: var(--bgCardColor);
     }
     .tag {
       margin-left: 40px;

@@ -4,7 +4,7 @@
     <Navbar></Navbar>
     <div class="mainPanel">
       <!-- 轮播图 -->
-      <el-card shadow="always">
+      <el-card shadow="always" class="card-carousel">
         <el-carousel
           :interval="3000"
           type="card"
@@ -92,48 +92,14 @@
 <script setup lang="ts">
 import { User, View, ChatLineRound, Star, Clock } from '@element-plus/icons-vue'
 import BacktopCom from '@/components/BackTop/BacktopCom.vue'
-import { useRouter } from 'vue-router'
-import { computed, provide } from 'vue'
-
-import { swiperStore, userStore, blogStore } from '@/store'
-import { storeToRefs } from 'pinia'
-import { number } from 'echarts'
-
-const s_store = swiperStore()
-const { swiper } = storeToRefs(s_store)
-const swiperList = computed(() => {
-  return swiper.value.swiper
-})
-
-const u_store = userStore()
-const { userInfo } = storeToRefs(u_store)
-const avatar = computed(() => {
-  return userInfo.value.userInfo[0]?.avatar
-})
-const uname = computed(() => {
-  return userInfo.value.userInfo[0]?.uname
-})
-const desc1 = computed(() => {
-  return userInfo.value.userInfo[0]?.desc1
-})
-const desc2 = computed(() => {
-  return userInfo.value.userInfo[0]?.desc2
-})
-
-const b_store = blogStore()
-const { sortBlog } = storeToRefs(b_store)
-const sortBlogList = computed(() => {
-  return sortBlog.value.blog.slice(0, 8)
-})
-
-const router = useRouter()
-const goBlogDetail = (id: number) => {
-  router.push(`/blogdetail?blog_id=${id}`)
-}
-const goCenter = () => {
-  router.push('/center')
-  sessionStorage.setItem('path', '/center')
-}
+import { useSwiper } from '@/hooks/useSwiper'
+import { useBlog } from '@/hooks/useBlog'
+import { useUser } from '@/hooks/useUser'
+import { useRouters } from '@/hooks/useRouter'
+const { swiperList } = useSwiper()
+const { sortBlogList } = useBlog()
+const { avatar, uname, desc1, desc2 } = useUser()
+const { goBlogDetail, goCenter } = useRouters()
 </script>
 
 <style scoped lang="less">
