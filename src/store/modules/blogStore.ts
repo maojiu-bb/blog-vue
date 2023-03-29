@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
-import { Blog, IpublicBlog, Itag } from '@/types/blog'
+import { Blog, IpublicBlog, Itag, Tstar, Tview } from '@/types/blog'
 import {
   getBlog,
   getSortBlog,
   getBlogDetail,
   publicBlog,
   getTags,
-  getObscureBlogs
+  getObscureBlogs,
+  updateView,
+  updateStar
 } from '@/api/requests'
 import { reactive, ref } from 'vue'
 
@@ -61,6 +63,22 @@ export const blogStore = defineStore('blog', () => {
     }
   }
 
+  const updateViewCount = async (data: Tview) => {
+    const { data: res } = await updateView(data)
+    if (res.code === 200) {
+      getBlogList()
+      getSortBlogList()
+    }
+  }
+
+  const updateStarCount = async (data: Tstar) => {
+    const { data: res } = await updateStar(data)
+    if (res.code === 200) {
+      getBlogList()
+      getSortBlogList()
+    }
+  }
+
   return {
     sortBlog,
     blog,
@@ -69,6 +87,8 @@ export const blogStore = defineStore('blog', () => {
     obscureBlog,
     getBlogInfo,
     publidBlogInfo,
-    getObscureBlogList
+    getObscureBlogList,
+    updateViewCount,
+    updateStarCount
   }
 })

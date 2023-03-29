@@ -1,6 +1,6 @@
 import request from '.'
 import { Iavatar, Iuserinfo } from '@/types/user'
-import { IpublicBlog } from '@/types/blog'
+import { IpublicBlog, Tstar, Tview } from '@/types/blog'
 import { Iproject } from '@/types/project'
 
 // 获取用户信息
@@ -78,4 +78,18 @@ export const getProject = () =>
   request({
     url: '/projects',
     method: 'GET'
+  })
+// 更新view
+export const updateView = (params: Tview) =>
+  request({
+    url: '/updateView',
+    method: 'POST',
+    data: params
+  })
+// 更新star
+export const updateStar = (params: Tstar) =>
+  request({
+    url: '/updateStar',
+    method: 'POST',
+    data: params
   })
