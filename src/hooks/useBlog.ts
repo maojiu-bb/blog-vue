@@ -4,8 +4,14 @@ import { storeToRefs } from 'pinia'
 
 export const useBlog = () => {
   const b_store = blogStore()
-  const { blog, tags, obscureBlog, sortBlog } = storeToRefs(b_store)
-  const { publidBlogInfo, getObscureBlogList } = b_store
+  const { blog, tags, obscureBlog, sortBlog, blogDetail } = storeToRefs(b_store)
+  const {
+    publidBlogInfo,
+    getObscureBlogList,
+    getBlogInfo,
+    updateViewCount,
+    updateStarCount
+  } = b_store
   const sortBlogList = computed(() => {
     return sortBlog.value.blog.slice(0, 8)
   })
@@ -28,6 +34,9 @@ export const useBlog = () => {
     }
     return max + 1
   })
+  const blogInfo = computed(() => {
+    return blogDetail.value.blog[0]
+  })
 
   return {
     sortBlogList,
@@ -37,7 +46,12 @@ export const useBlog = () => {
     blog_id,
     obscureBlog,
     obscureBlogList,
+    blogDetail,
+    blogInfo,
     publidBlogInfo,
-    getObscureBlogList
+    getObscureBlogList,
+    getBlogInfo,
+    updateViewCount,
+    updateStarCount
   }
 }

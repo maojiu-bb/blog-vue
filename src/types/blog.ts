@@ -25,6 +25,16 @@ export interface IpublicBlog {
 
 export type Itag = []
 
+export type Tview = {
+  blog_id: number
+  newView: number
+}
+
+export type Tstar = {
+  blog_id: number
+  newStar: number
+}
+
 export class Blog {
   blog: Iblog[] = []
 }

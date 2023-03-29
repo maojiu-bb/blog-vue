@@ -38,7 +38,7 @@
                 ><i class="item">{{ item.comment_count }}</i></span
               >
               <span
-                ><el-icon title="star"><Star /></el-icon
+                ><el-icon title="star" class="star"><Star /></el-icon
                 ><i class="item">{{ item.star }}</i></span
               >
               <span v-for="(tag, index) in item.tag" :key="index">
