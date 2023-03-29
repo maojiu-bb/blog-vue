@@ -1,10 +1,6 @@
 <template>
   <div class="blogdetail">
-    <el-page-header @back="goBack" :icon="ArrowLeft" class="header">
-      <template #content>
-        <span class="text-large font-600 mr-3">Blog Detaili</span>
-      </template>
-    </el-page-header>
+    <GoBackCom title="Blog Detail"></GoBackCom>
     <el-card shadow="always" class="card">
       <template #header>
         <div class="card-header">
@@ -44,9 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter, useRoute } from 'vue-router'
-import { ArrowLeft, Star } from '@element-plus/icons-vue'
+import { useRoute } from 'vue-router'
+import { Star } from '@element-plus/icons-vue'
 import BacktopCom from '@/components/BackTop/BacktopCom.vue'
+import GoBackCom from '@/components/GoBack/GoBackCom.vue'
 import { onMounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { blogStore } from '@/store'
@@ -67,11 +64,6 @@ const blogInfo = computed(() => {
 onMounted(() => {
   getBlogDetail()
 })
-
-const router = useRouter()
-const goBack = () => {
-  router.back()
-}
 </script>
 
 <style scoped lang="less">

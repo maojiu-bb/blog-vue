@@ -13,10 +13,10 @@
       </div>
       <!-- 链接 -->
       <div class="link">
-        <a href="https://github.com/maojiu-bb/blog">
+        <a href="https://github.com/maojiu-bb/blog" target="_blank">
           <img src="@/assets/imgs/github.png" alt="" />
         </a>
-        <a href="https://gitee.com/maojiubb/blog">
+        <a href="https://gitee.com/maojiubb/blog" target="_blank">
           <img src="@/assets/imgs/gitee.png" alt="" />
         </a>
       </div>
@@ -25,23 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { userStore } from '@/store/modules/userStore'
-import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
-const store = userStore()
-const router = useRouter()
-
-const { userInfo } = storeToRefs(store)
-
-const avatar = computed(() => {
-  return userInfo.value.userInfo[0]?.avatar
-})
-
-const signIn = () => {
-  router.push('/home')
-  sessionStorage.setItem('path', '/home')
-}
+import { useLogin } from '@/hooks/useLogin'
+import { useSwitch } from '@/hooks/useSwitch'
+const { avatar, signIn } = useLogin()
+useSwitch()
 </script>
 
 <style scoped lang="less">

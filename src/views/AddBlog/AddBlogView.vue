@@ -1,13 +1,12 @@
 <template>
   <div class="addBlog">
-    <el-page-header @back="goBack" :icon="ArrowLeft" class="header">
-      <template #content>
-        <span class="text-large font-600 mr-3">Add a Blog</span>
+    <GoBackCom title="Add a Blog">
+      <template #button>
+        <el-button type="primary" class="button" :icon="Edit" @click="addBlog"
+          >Add Blog</el-button
+        >
       </template>
-      <el-button type="primary" class="button" :icon="Edit" @click="addBlog"
-        >Add Blog</el-button
-      >
-    </el-page-header>
+    </GoBackCom>
     <el-drawer v-model="drawer" direction="rtl">
       <template #header>
         <h4>finish follow options</h4>
@@ -78,7 +77,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ArrowLeft, Edit, Plus } from '@element-plus/icons-vue'
+import { Edit, Plus } from '@element-plus/icons-vue'
+import GoBackCom from '@/components/GoBack/GoBackCom.vue'
 import { ref, reactive, computed } from 'vue'
 import {
   ElMessage,
@@ -87,9 +87,9 @@ import {
   UploadProps,
   UploadUserFile
 } from 'element-plus'
-import { blogStore, userStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { IpublicBlog } from '@/types/blog'
+import { useBlog } from '@/hooks/useBlog'
+import { useUser } from '@/hooks/useUser'
 
 const fileList = ref<UploadUserFile[]>([])
 const ruleFormRef = ref<FormInstance>()
@@ -118,9 +118,6 @@ const rules = reactive<FormRules>({
 const drawer = ref(false)
 
 const router = useRouter()
-const goBack = () => {
-  router.back()
-}
 
 const addBlog = () => {
   drawer.value = true
@@ -130,39 +127,9 @@ const addBlog = () => {
   fileList.value = []
 }
 
-/* const handleClose = (done: () => void) => {
-  ElMessageBox.confirm('Are you sure you want to close this?')
-    .then(() => {
-      done()
-    })
-    .catch(() => {
-      // catch error
-    })
-} */
+const { tag, blog_id, publidBlogInfo } = useBlog()
+const { uname } = useUser()
 
-const b_store = blogStore()
-const u_store = userStore()
-const { userInfo } = storeToRefs(u_store)
-const { blog, tags } = storeToRefs(b_store)
-const { publidBlogInfo } = b_store
-
-const tag: any = computed(() => {
-  return tags.value
-})
-
-const blog_id = computed(() => {
-  const id = blog.value.blog.map((item) => item.blog_id)
-  let max = id[0]
-  for (let i = 0; i < id.length; i++) {
-    if (id[i] > max) {
-      max = id[i]
-    }
-  }
-  return max + 1
-})
-const author = computed(() => {
-  return userInfo.value.userInfo[0]?.uname
-})
 const detail = ref('')
 const coevr = computed(() => {
   return fileList.value[0]?.url
@@ -179,7 +146,7 @@ const confirmClick = async (formEl: FormInstance | undefined) => {
     if (valid) {
       const data: IpublicBlog = {
         blog_id: blog_id.value,
-        author: author.value,
+        author: uname.value,
         cover: coevr.value,
         detail: detail.value,
         title: ruleForm.title,
@@ -187,7 +154,7 @@ const confirmClick = async (formEl: FormInstance | undefined) => {
         tag: ruleForm.value as []
       }
       publidBlogInfo(data)
-        .then((res) => {
+        .then((res: any) => {
           drawer.value = false
           detail.value = ''
           ElMessage({
@@ -200,7 +167,7 @@ const confirmClick = async (formEl: FormInstance | undefined) => {
             router.push('/bloglist')
           }, 1000)
         })
-        .catch((err) => {
+        .catch((err: any) => {
           ElMessage({
             message: '发布失败！',
             type: 'warning'
@@ -224,15 +191,5 @@ const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
 </script>
 
 <style scoped lang="less">
-.addBlog {
-  padding: 20px;
-  .header {
-    padding-bottom: 20px;
-    .button {
-      position: absolute;
-      right: 60px;
-      top: 15px;
-    }
-  }
-}
+@import '@/style/addblog.less';
 </style>

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import '@/theme/theme.css'
 // 导入路由模块
 import router from './router'
 // 导入全局组件

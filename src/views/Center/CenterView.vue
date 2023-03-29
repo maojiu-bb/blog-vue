@@ -63,27 +63,10 @@ import BacktopCom from '@/components/BackTop/BacktopCom.vue'
 import ViewChart from '@/components/Charts/ViewCharts.vue'
 import CommentCharts from '@/components/Charts/CommentCharts.vue'
 import StarCharts from '@/components/Charts/StarCharts.vue'
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { userStore } from '@/store'
-
-const u_store = userStore()
-const { userInfo } = storeToRefs(u_store)
-const user = computed(() => {
-  return userInfo.value.userInfo[0]
-})
-
-const router = useRouter()
-const addBlog = () => {
-  router.push('/addblog')
-}
-const addProject = () => {
-  router.push('/addproject')
-}
-const settingInfo = () => {
-  router.push('/setting')
-}
+import { useUser } from '@/hooks/useUser'
+import { useRouters } from '@/hooks/useRouter'
+const { user } = useUser()
+const { addBlog, addProject, settingInfo } = useRouters()
 </script>
 
 <style scoped lang="less">

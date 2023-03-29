@@ -1,0 +1,32 @@
+.addBlog {
+  padding: 20px;
+  .header {
+    padding-bottom: 20px;
+    .button {
+      position: absolute;
+      right: 60px;
+      top: 15px;
+    }
+  }
+  :deep(.v-md-textarea-editor pre),
+  :deep(.v-md-textarea-editor textarea) {
+    background-color: var(--bgCardColor);
+    color: var(--textColor);
+  }
+  :deep(.vuepress-markdown-body) {
+    background-color: var(--bgCardColor);
+    color: var(--textColor);
+  }
+  :deep(.v-md-editor__right-area) {
+    background-color: var(--bgCardColor);
+  }
+  :deep(.v-md-editor__left-area) {
+    background-color: var(--bgCardColor);
+  }
+  :deep(.v-md-editor__left-area-title) {
+    color: var(--textColor);
+  }
+  :deep(.v-md-editor__toc-nav-item) {
+    color: var(--textColor);
+  }
+}

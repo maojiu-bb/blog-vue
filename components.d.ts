@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    GoBackCom: typeof import('./src/components/GoBack/GoBackCom.vue')['default']
     NavbarCom: typeof import('./src/components/NavBar/NavbarCom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
