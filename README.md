@@ -1,19 +1,79 @@
-# Vue 3 + TypeScript + Vite
+## Personal blogging system
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a personal blog site with some blogs and projects written by myself. At present, there are functions such as viewing and publishing blogs, viewing and publishing projects, modifying personal information, and switching themes. At present, only some basic functions have been implemented, and more functions are coming soon.
 
-## Recommended IDE Setup
+### Run the project
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. Clone the project locally
 
-## Type Support For `.vue` Imports in TS
+```
+git clone git@github.com:maojiu-bb/blog.git
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+2. Install the dependent package
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+```
+npm install
+```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-# blog
+3. run
+
+```
+npm run dev
+```
+
+### The technology stack used
+
+#### Front
+
+> Vue3 + TypeScript + Vite + Vue-Router + Pinia + Element-plus
+
+```
+structure:
+      |--api   // Related to network requests
+      |
+      |--assets   // Hold static resources
+      |
+      |--components  // Common components
+      |
+      |--hooks   // Custom hook function
+src-- |
+      |--router   // Related to Router
+      |
+      |--store    // Data store
+      |
+      |--style    // The style of the item
+      |
+      |--theme    // Customized theme styles
+      |
+      |--types    // TS type constraints
+      |
+      |--views    // Pages of the project
+```
+
+#### Back
+
+> Node.js + express + mongoose
+
+the express serve address:
+
+```
+https://github.com/maojiu-bb/blog-server
+```
+
+#### Database
+
+> MongoDB
+
+### Features
+
+Features that may be developed in the future:
+
+- Comment function
+- Star function
+- Friend chain module
+- Resource sharing module
+
+### LICENSE
+
+ISC
